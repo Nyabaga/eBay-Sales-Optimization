@@ -2,28 +2,28 @@ import streamlit as st
 import pandas as pd
 from prophet import Prophet
 import matplotlib.pyplot as plt
+import yfinance as yf
 
-# Load your data
+# Load data from yfinance
 @st.cache
 def load_data():
-    # Replace this with your data loading method
-    df = pd.read_csv('ebay_historical_data.csv')
+    stock = yf.Ticker("EBAY")
+    df = stock.history(start="2023-01-01", end="2024-01-01")
+    df.reset_index(inplace=True)
     return df
 
 def train_model(df):
-    # Prepare the data for Prophet
     df_prophet = df.rename(columns={'Date': 'ds', 'Close': 'y'})
     model = Prophet()
     model.fit(df_prophet)
     return model
 
 def forecast(model, future):
-    # Make predictions
     forecast = model.predict(future)
     return forecast
 
 def main():
-    st.title('EBAY-SALES-OPTIMIZATION')
+    st.title('Optimizing eBay Sales with Predictive Analytics')
 
     # Load data
     df = load_data()
