@@ -1,56 +1,55 @@
 import streamlit as st
-import yfinance as yf
 import pandas as pd
 from prophet import Prophet
 import matplotlib.pyplot as plt
 
-# Set page layout
-st.set_page_config(layout="wide")
-
-# App title
-st.title('Optimizing eBay Sales with Predictive Analytics')
-
-# Ticker input
-ticker = st.text_input('Enter stock ticker:', 'EBAY')
-
-# Fetch historical data from Yahoo Finance
+# Load your data
 @st.cache
-def load_data(ticker):
-    stock = yf.Ticker(ticker)
-    data = stock.history(period='max')
-    data.reset_index(inplace=True)
-    return data
+def load_data():
+    # Replace this with your data loading method
+    df = pd.read_csv('ebay_historical_data.csv')
+    return df
 
-data = load_data(ticker)
+def train_model(df):
+    # Prepare the data for Prophet
+    df_prophet = df.rename(columns={'Date': 'ds', 'Close': 'y'})
+    model = Prophet()
+    model.fit(df_prophet)
+    return model
 
-# Display raw data
-st.subheader('Raw data')
-st.write(data.tail())
+def forecast(model, future):
+    # Make predictions
+    forecast = model.predict(future)
+    return forecast
 
-# Prepare data for Prophet
-df = data[['Date', 'Close']]
-df.rename(columns={'Date': 'ds', 'Close': 'y'}, inplace=True)
+def main():
+    st.title('EBAY-SALES-OPTIMIZATION')
 
-# Train the Prophet model
-m = Prophet()
-m.fit(df)
+    # Load data
+    df = load_data()
+    
+    # Train the model
+    model = train_model(df)
+    
+    # User input for prediction
+    st.sidebar.header('User Input')
+    date_input = st.sidebar.date_input("Select a date:", min_value=df['Date'].max())
+    
+    # Prepare future dataframe
+    future = pd.DataFrame({'ds': [date_input]})
+    
+    # Make prediction
+    forecast = forecast(model, future)
+    predicted_price = forecast['yhat'].values[0]
+    
+    # Display result
+    st.write(f"Predicted closing price for {date_input}: ${predicted_price:.2f}")
 
-# Make future predictions
-future = m.make_future_dataframe(periods=365)
-forecast = m.predict(future)
+    # Plot historical data and forecast
+    fig, ax = plt.subplots()
+    model.plot(model.predict(pd.DataFrame({'ds': df['Date']})), ax=ax)
+    plt.title('Stock Price Forecast')
+    st.pyplot(fig)
 
-# Plot forecast
-fig1 = m.plot(forecast)
-st.pyplot(fig1)
-
-# Plot components
-st.subheader('Forecast components')
-fig2 = m.plot_components(forecast)
-st.pyplot(fig2)
-
-# Display forecast data
-st.subheader('Forecast data')
-st.write(forecast.tail())
-
-# Optionally download the forecast data
-st.download_button(label='Download Forecast Data', data=forecast.to_csv(), file_name='forecast.csv', mime='text/csv')
+if __name__ == "__main__":
+    main()
