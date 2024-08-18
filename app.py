@@ -1,55 +1,43 @@
 import streamlit as st
+import joblib
 import pandas as pd
 from prophet import Prophet
-import matplotlib.pyplot as plt
-import yfinance as yf
 
-# Load data from yfinance
-@st.cache
-def load_data():
-    stock = yf.Ticker("EBAY")
-    df = stock.history(start="2023-01-01", end="2024-01-01")
-    df.reset_index(inplace=True)
-    return df
+# Load the trained Prophet model
+model = joblib.load('prophet.pkl')
 
-def train_model(df):
-    df_prophet = df.rename(columns={'Date': 'ds', 'Close': 'y'})
-    model = Prophet()
-    model.fit(df_prophet)
-    return model
+# Title of the app
+st.title('Optimizing eBay Sales with Predictive Analytics')
 
-def forecast(model, future):
-    forecast = model.predict(future)
-    return forecast
+# Instructions
+st.write("""
+         ## Predict Future Stock Prices
+         Enter the date you want to predict the stock price for.
+         """)
 
-def main():
-    st.title('Optimizing eBay Sales with Predictive Analytics')
+# Input for target date
+target_date = st.date_input("Select a date", value=pd.to_datetime('2024-12-12'))
 
-    # Load data
-    df = load_data()
-    
-    # Train the model
-    model = train_model(df)
-    
-    # User input for prediction
-    st.sidebar.header('User Input')
-    date_input = st.sidebar.date_input("Select a date:", min_value=df['Date'].max())
-    
-    # Prepare future dataframe
-    future = pd.DataFrame({'ds': [date_input]})
-    
-    # Make prediction
-    forecast = forecast(model, future)
-    predicted_price = forecast['yhat'].values[0]
-    
-    # Display result
-    st.write(f"Predicted closing price for {date_input}: ${predicted_price:.2f}")
+# Convert target date to datetime
+target_date = pd.to_datetime(target_date)
 
-    # Plot historical data and forecast
-    fig, ax = plt.subplots()
-    model.plot(model.predict(pd.DataFrame({'ds': df['Date']})), ax=ax)
-    plt.title('Stock Price Forecast')
-    st.pyplot(fig)
+# Define future dates
+last_date_in_data = model.history['ds'].max()
+future_periods = (target_date - last_date_in_data).days + 1
 
-if __name__ == "__main__":
-    main()
+# Create future dataframe
+future = model.make_future_dataframe(periods=future_periods)
+
+# Make predictions
+forecast = model.predict(future)
+
+# Display the prediction for the target date
+selected_row = forecast[forecast['ds'] == target_date]
+
+if not selected_row.empty:
+    st.write(f"## Prediction for {target_date.date()}")
+    st.write(f"**Predicted closing price:** ${selected_row['yhat'].values[0]:.2f}")
+    st.write(f"**Lower bound:** ${selected_row['yhat_lower'].values[0]:.2f}")
+    st.write(f"**Upper bound:** ${selected_row['yhat_upper'].values[0]:.2f}")
+else:
+    st.write("No prediction available for the selected date.")

@@ -3,7 +3,7 @@ pandas
 prophet
 matplotlib
 yfinance
-matplotlib==3.3.1
+matplotlib==3.9.2
 matplotlib-inline==0.1.7
 pandas==2.0.3
 pandasql==0.7.3
