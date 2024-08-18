@@ -1,4 +1,10 @@
-#                      eBay Sales Optimization
+<h1 style="text-align:center; color: #2E86C1;">Optimizing eBay Sales with Predictive Analytics</h1>
+<h3 style="text-align:center; color: #D35400;">Analyzing Trends and Forecasting Future Performance!</h3>
+
+<p align="center">
+  <img src="images/eBay-prediction.jpg" alt="alt text" />
+</p>
+
 
 ## Business Understanding
 
