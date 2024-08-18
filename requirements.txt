@@ -1,3 +1,8 @@
+streamlit
+pandas
+prophet
+matplotlib
+yfinance
 matplotlib==3.3.1
 matplotlib-inline==0.1.7
 pandas==2.0.3
