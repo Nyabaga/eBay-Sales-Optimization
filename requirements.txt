@@ -1,7 +1,7 @@
 streamlit==1.37.1
 pandas==2.0.3
 prophet==1.1.5
-joblib==1.2.0
+joblib==1.4.2
 matplotlib==3.7.2
 yfinance==0.2.40
 matplotlib-inline==0.1.7
