@@ -53,23 +53,23 @@ The data for this project is sourced from Yahoo Finance using the yfinance API, 
 In the Data Preparation step, we focus on ensuring the dataset is clean, structured, and ready for the modeling phase. This involves handling missing values by either imputing them with appropriate statistics (mean, median, mode) or removing incomplete records, depending on the context. Feature engineering is crucial at this stage to enhance the model's performance. Finally, we split the dataset into training and testing sets, ensuring that the model is evaluated on unseen data to accurately assess its generalization capabilities.
 
 ## Explanatory Data Analysis
-![alt text](image/historical_moving_average.JPG)
+![alt text](images/historical_moving_average.JPG)
 
 The closing prices show significant fluctuations, with distinct highs and lows. This indicates that the market has gone through phases of swift variation, potentially driven by different economic influences or occurrences.
 
-![alt text](image/trend.JPG)
-![alt text](image/seasonal.JPG)
-![alt text](image/residual.JPG)
+![alt text](images/trend.JPG)
+![alt text](images/seasonal.JPG)
+![alt text](images/residual.JPG)
 
 The trend component indicates a general upward trajectory in stock closing prices over time. The seasonality component reveals regular, repeating patterns in the data, with consistent peaks and troughs occurring at specific intervals, often annually. These recurring fluctuations suggest strong seasonal influences on the stock prices. Meanwhile, the residual component represents the irregular variations that remain after accounting for both trend and seasonality. Notably, there is increased volatility in the residuals around 2020, likely reflecting unexpected market events or disruptions during that period.
 
 ## Modelling and Evaluation
 
-![alt text](image/arima_actual_prices.JPG)
+![alt text](images/arima_actual_prices.JPG)
 
-![alt text](image/sarima_model.JPG)
+![alt text](images/sarima_model.JPG)
 
-![alt text](image/prophet_model.JPG)
+![alt text](images/prophet_model.JPG)
 
 The Prophet model performs best based on the provided metrics:
 
@@ -77,6 +77,13 @@ It has the lowest MAE, indicating smaller average errors. It has the lowest MSE 
 
 ## Summary
 This analysis employed three distinct time series forecasting models—ARIMA, Prophet, and SARIMA—to predict future closing prices. The models were assessed using performance metrics such as MAE, MSE, and RMSE. Prophet outperformed the others, especially in terms of MAE and RMSE, indicating higher accuracy in its predictions. While the ARIMA model effectively captured linear trends, it struggled with the seasonality and irregularities in the data. SARIMA, which accounts for seasonality, performed better than ARIMA but was still outperformed by Prophet. Overall, the Prophet model was the most effective at capturing both trends and seasonal patterns, making it the most suitable for this dataset.
+
+
+**Contributors**
+- [Julius Kinyua](https://github.com/czarprocoder)
+- [Abigael Nyabaga](https://github.com/Nyabaga)
+- [Judy Koech](https://github.com/Judykoech)
+- [Phillip Oluoch](https://github.com/OCHI-BUOY)
 
 
 
