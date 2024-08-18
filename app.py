@@ -18,15 +18,15 @@ st.write("""
 # Input for target date
 target_date = st.date_input("Select a date", value=pd.to_datetime('2024-12-12'))
 
-# Convert target date to datetime
-target_date = pd.to_datetime(target_date)
+# Convert target date to datetime and set the time to 04:00:00
+target_date = pd.to_datetime(target_date).replace(hour=4, minute=0, second=0)
 
 # Define future dates
 last_date_in_data = model.history['ds'].max()
 future_periods = (target_date - last_date_in_data).days + 1
 
 # Create future dataframe
-future = model.make_future_dataframe(periods=future_periods)
+future = model.make_future_dataframe(periods=future_periods, freq='D')
 
 # Make predictions
 forecast = model.predict(future)
@@ -35,7 +35,7 @@ forecast = model.predict(future)
 selected_row = forecast[forecast['ds'] == target_date]
 
 if not selected_row.empty:
-    st.write(f"## Prediction for {target_date.date()}")
+    st.write(f"## Prediction for {target_date}")
     st.write(f"**Predicted closing price:** ${selected_row['yhat'].values[0]:.2f}")
     st.write(f"**Lower bound:** ${selected_row['yhat_lower'].values[0]:.2f}")
     st.write(f"**Upper bound:** ${selected_row['yhat_upper'].values[0]:.2f}")
