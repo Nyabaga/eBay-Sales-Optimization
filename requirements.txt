@@ -3,4 +3,10 @@ pandas
 prophet
 matplotlib
 yfinance
-
+matplotlib==3.3.1
+matplotlib-inline==0.1.7
+pandas==2.0.3
+pandasql==0.7.3
+prophet==1.1.5
+streamlit==1.37.1
+yfinance==0.2.41
