@@ -7,12 +7,12 @@ from prophet import Prophet
 model = joblib.load('prophet.pkl')
 
 # Title of the app
-st.title('Optimizing eBay Sales with Predictive Analytics')
+st.title('Optimizing eBay Sales with Predictive Analytics ')
 
 # Instructions
 st.write("""
          ## Predict Future Stock Prices
-         Enter the date you want to predict the stock price for.
+         Enter the date you want to predict the stock price for .
          """)
 
 # Input for target date
