@@ -7,7 +7,7 @@ import time
 # Multi-page layout
 def main():
     st.sidebar.title("Navigation")
-    page = st.sidebar.selectbox("Choose a page", ["Home", "Custom Prediction", "Upload Data"])
+    page = st.sidebar.selectbox("Choose a page", ["Home", "Custom Prediction", "Upload Data", "About"])
 
     if page == "Home":
         home_page()
@@ -15,6 +15,8 @@ def main():
         custom_prediction_page()
     elif page == "Upload Data":
         upload_data_page()
+    elif page == "About":
+        about_page()
 
 def home_page():
     st.title('Optimizing eBay Sales with Predictive Analytics')
@@ -23,6 +25,9 @@ def home_page():
     Use this app to predict future stock prices and optimize your sales on eBay.
     Navigate using the sidebar to explore more features.
     """)
+    
+    # Display an image on the home page
+    st.image("images/eBay-prediction.jpg", use_column_width=True)
 
 def custom_prediction_page():
     st.title('Predict Future Stock Prices')
@@ -90,6 +95,15 @@ def upload_data_page():
         if st.button('Run Predictions'):
             # Placeholder for running predictions on the uploaded data
             st.write("Predictions will be implemented here.")
+
+def about_page():
+    st.title('About eBay')
+    st.write("""
+    eBay is an eCommerce platform that operates as an online marketplace where individuals and businesses can buy and sell a wide variety of products, including electronics, fashion, collectibles, home goods, and more.
+    """)
+    
+    # Display an image on the About page
+    st.image("images/eBay-prediction.jpg", caption="eBay Marketplace", use_column_width=True)
 
 if __name__ == "__main__":
     main()
