@@ -225,50 +225,12 @@ def upload_data_page():
 
 def about_page():
     st.title('About eBay')
-
-    # Add CSS to set a blurred background image
-    st.markdown(
-        """
-        <style>
-        .stApp {
-            background-image: url("images/about page.jpg");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-        }
-        
-        .blurred-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            filter: blur(8px);
-            z-index: -1;
-        }
-        
-        .content {
-            position: relative;
-            z-index: 1;
-            color: #ffffff;
-            padding: 20px;
-        }
-        </style>
-        """, unsafe_allow_html=True
-    )
-    
-    # Background blur image
-    st.markdown('<div class="blurred-background"></div>', unsafe_allow_html=True)
-
-    # Display content on top of the blurred image
-    st.markdown('<div class="content">', unsafe_allow_html=True)
-    
     st.write("""
     eBay is an eCommerce platform that operates as an online marketplace where individuals and businesses can buy and sell a wide variety of products, including electronics, fashion, collectibles, home goods, and more.
     """)
     
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Display an image on the About page
+    st.image("images/about page.jpg", caption="eBay Marketplace", use_column_width=True)
 
 if __name__ == "__main__":
     main()
