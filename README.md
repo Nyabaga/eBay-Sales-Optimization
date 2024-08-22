@@ -81,8 +81,10 @@ This analysis employed three distinct time series forecasting models—ARIMA, Pr
 
 ## Project Presentation
 
-You can view the:
->project pitch [here](presentation-slides/Optimizing eBay Sales with Predictive Analytics .2 (1).pdf).
+**You can view the:**
+
+>project pitch [here](presentation-slides/Optimizing%20eBay%20Sales%20with%20Predictive%20Analytics%20.2%20(1).pdf).
+>
 >project presentation [here](presentation-slides/eBay-Sales-forcast.pdf).
 
 
