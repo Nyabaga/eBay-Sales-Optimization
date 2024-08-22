@@ -79,6 +79,13 @@ It has the lowest MAE, indicating smaller average errors. It has the lowest MSE 
 This analysis employed three distinct time series forecasting models—ARIMA, Prophet, and SARIMA—to predict future closing prices. The models were assessed using performance metrics such as MAE, MSE, and RMSE. Prophet outperformed the others, especially in terms of MAE and RMSE, indicating higher accuracy in its predictions. While the ARIMA model effectively captured linear trends, it struggled with the seasonality and irregularities in the data. SARIMA, which accounts for seasonality, performed better than ARIMA but was still outperformed by Prophet. Overall, the Prophet model was the most effective at capturing both trends and seasonal patterns, making it the most suitable for this dataset.
 
 
+## Project Presentation
+
+You can view the:
+>project pitch [here](presentation-slides/Optimizing eBay Sales with Predictive Analytics .2 (1).pdf).
+>project presentation [here](presentation-slides/eBay-Sales-forcast.pdf).
+
+
 **Contributors**
 - [Julius Kinyua](https://github.com/czarprocoder)
 - [Abigael Nyabaga](https://github.com/Nyabaga)
